@@ -110,8 +110,8 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 
 	@Override
 	public void divideRational(RationalNumber<Number> rationalQuocient) {
-		multiply(numerator, (T) rationalQuocient.getDenominator());
-		multiply(denominator, (T) rationalQuocient.getNumerator());
+		this.numerator = multiply(numerator, (T) rationalQuocient.getDenominator());
+		this.denominator = multiply(denominator, (T) rationalQuocient.getNumerator());
 		simplifyRational();
 	}
 

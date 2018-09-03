@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.DivisionByZeroException;
 import numericSystem.*;
 
 public class Calculator {
@@ -39,36 +40,60 @@ public class Calculator {
 		this.resultNumber = resultNumber;
 	}
 	
-	public void add() {
+	public void add() throws DivisionByZeroException {
 		resultNumber=firstNumber;
 		resultNumber.addRational(secondNumber);
+		
+		if(firstNumber.getDenominator().intValue()==0 || secondNumber.getDenominator().intValue()==0) {
+			new DivisionByZeroException("Dividing by zero isn't a possible operation");
+		}
 	}
 	
-	public void substract() {
+	public void substract() throws DivisionByZeroException{
 		resultNumber=firstNumber;
 		resultNumber.substractRational(secondNumber);
+		
+		if(firstNumber.getDenominator().intValue()==0 || secondNumber.getDenominator().intValue()==0) {
+			new DivisionByZeroException("Dividing by zero isn't a possible operation");
+		}
 	}
 	
-	public void multiply() {
+	public void multiply() throws DivisionByZeroException{
 		resultNumber=firstNumber;
 		resultNumber.multiplyRational(secondNumber);
+		
+		if(firstNumber.getDenominator().intValue()==0 || secondNumber.getDenominator().intValue()==0) {
+			new DivisionByZeroException("Dividing by zero isn't a possible operation");
+		}
 	}
 	
-	public void divide() {
+	public void divide() throws DivisionByZeroException{
 		resultNumber=firstNumber;
 		resultNumber.divideRational(secondNumber);
+		
+		if(firstNumber.getDenominator().intValue()==0 || secondNumber.getNumerator().intValue()==0) {
+			new DivisionByZeroException("Dividing by zero isn't a possible operation");
+		}
 	}
 	
 	public void simplify() {}
 	
-	public void inverse() {
+	public void inverse() throws DivisionByZeroException{
 		resultNumber=firstNumber;
 		resultNumber.rationalInverse();
+		
+		if(firstNumber.getNumerator().intValue()==0) {
+			new DivisionByZeroException("Dividing by zero isn't a possible operation");
+		}
 	}
 	
-	public void square() {
+	public void square() throws DivisionByZeroException{
 		resultNumber=firstNumber;
 		resultNumber.squaredRational();
+		
+		if(firstNumber.getDenominator().intValue()==0) {
+			new DivisionByZeroException("Dividing by zero isn't a possible operation");
+		}
 	}
 
 }

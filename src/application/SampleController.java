@@ -3,6 +3,7 @@ package application;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import exceptions.DivisionByZeroException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -90,25 +91,25 @@ public class SampleController implements Initializable{
 	private Calculator calculator;
 	
 	public void pressOne() {
-		if(firstNumerator.isFocused()) {
+		if(firstNumerator.isPressed()) {
 			firstNumerator.setText("1");
-		}else if(firstDenominator.isFocused()) {
+		}else if(firstDenominator.isPressed()) {
 			firstDenominator.setText("1");
-		}else if(secondNumerator.isFocused()) {
+		}else if(secondNumerator.isPressed()) {
 			secondNumerator.setText("1");
-		}else if(secondDenominator.isFocused()) {
+		}else if(secondDenominator.isPressed()) {
 			secondDenominator.setText("1");
 		}
 	}
 	
 	public void pressTwo() {
-		if(firstNumerator.isFocused()) {
+		if(firstNumerator.isPressed()) {
 			firstNumerator.setText("2");
-		}else if(firstDenominator.isFocused()) {
+		}else if(firstDenominator.isPressed()) {
 			firstDenominator.setText("2");
-		}else if(secondNumerator.isFocused()) {
+		}else if(secondNumerator.isPressed()) {
 			secondNumerator.setText("2");
-		}else if(secondDenominator.isFocused()) {
+		}else if(secondDenominator.isPressed()) {
 			secondDenominator.setText("2");
 		}
 	}
@@ -198,7 +199,15 @@ public class SampleController implements Initializable{
 	}
 	
 	public void pressZero() {
-		
+		if(firstNumerator.isFocused()) {
+			firstNumerator.setText("0");
+		}else if(firstDenominator.isFocused()) {
+			firstDenominator.setText("0");
+		}else if(secondNumerator.isFocused()) {
+			secondNumerator.setText("0");
+		}else if(secondDenominator.isFocused()) {
+			secondDenominator.setText("0");
+		}		
 	}
 	
 	public void add() {
@@ -211,7 +220,11 @@ public class SampleController implements Initializable{
 		boolean rD = resultDenominator.getText().length()!=0;
 		
 		if(fN && fD && sN && sD && rN && rD) {
-			calculator.add();
+			try {
+				calculator.add();
+			} catch (DivisionByZeroException e) {
+				e.getMessage();
+			}
 		}
 		
 		operation.setText("+");
@@ -227,7 +240,11 @@ public class SampleController implements Initializable{
 		boolean rD = resultDenominator.getText().length()!=0;
 		
 		if(fN && fD && sN && sD && rN && rD) {
-			calculator.substract();
+			try {
+				calculator.substract();
+			} catch (DivisionByZeroException e) {
+				e.getMessage();
+			}
 		}
 		
 		operation.setText("-");
@@ -243,7 +260,11 @@ public class SampleController implements Initializable{
 		boolean rD = resultDenominator.getText().length()!=0;
 		
 		if(fN && fD && sN && sD && rN && rD) {
-			calculator.multiply();
+			try {
+				calculator.multiply();
+			} catch (DivisionByZeroException e) {
+				e.getMessage();
+			}
 		}
 		
 		operation.setText("x");
@@ -259,7 +280,11 @@ public class SampleController implements Initializable{
 		boolean rD = resultDenominator.getText().length()!=0;
 		
 		if(fN && fD && sN && sD && rN && rD) {
-			calculator.divide();
+			try {
+				calculator.divide();
+			} catch (DivisionByZeroException e) {
+				e.getMessage();
+			}
 		}
 		
 		operation.setText("÷");
@@ -273,7 +298,11 @@ public class SampleController implements Initializable{
 		boolean rD = resultDenominator.getText().length()!=0;
 		
 		if(fN && fD && rN && rD) {
-			calculator.inverse();
+			try {
+				calculator.inverse();
+			} catch (DivisionByZeroException e) {
+				e.getMessage();
+			}
 		}
 		
 		operation.setText("1/n");
@@ -287,7 +316,11 @@ public class SampleController implements Initializable{
 		boolean rD = resultDenominator.getText().length()!=0;
 		
 		if(fN && fD && rN && rD) {
-			calculator.square();
+			try {
+				calculator.square();
+			} catch (DivisionByZeroException e) {
+				e.getMessage();
+			}
 		}
 		
 		operation.setText("n²");
