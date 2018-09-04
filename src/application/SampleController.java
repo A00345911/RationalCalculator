@@ -91,25 +91,25 @@ public class SampleController implements Initializable{
 	private Calculator calculator;
 	
 	public void pressOne() {
-		if(firstNumerator.isPressed()) {
+		if(firstNumerator.isFocused()) {
 			firstNumerator.setText("1");
-		}else if(firstDenominator.isPressed()) {
+		}else if(firstDenominator.isFocused()) {
 			firstDenominator.setText("1");
-		}else if(secondNumerator.isPressed()) {
+		}else if(secondNumerator.isFocused()) {
 			secondNumerator.setText("1");
-		}else if(secondDenominator.isPressed()) {
+		}else if(secondDenominator.isFocused()) {
 			secondDenominator.setText("1");
 		}
 	}
 	
 	public void pressTwo() {
-		if(firstNumerator.isPressed()) {
+		if(firstNumerator.isFocused()) {
 			firstNumerator.setText("2");
-		}else if(firstDenominator.isPressed()) {
+		}else if(firstDenominator.isFocused()) {
 			firstDenominator.setText("2");
-		}else if(secondNumerator.isPressed()) {
+		}else if(secondNumerator.isFocused()) {
 			secondNumerator.setText("2");
-		}else if(secondDenominator.isPressed()) {
+		}else if(secondDenominator.isFocused()) {
 			secondDenominator.setText("2");
 		}
 	}

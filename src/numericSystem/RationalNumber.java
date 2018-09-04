@@ -1,5 +1,7 @@
 package numericSystem;
 
+import exceptions.DivisionByZeroException;
+
 public class RationalNumber<T extends Number> implements IRationalNumber<RationalNumber<Number>> {
 
 	private T numerator;
@@ -214,33 +216,78 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 
 	@Override
 	public void rationalInverse() {
-		inverse(numerator, denominator);
-		simplifyRational();
+		try {
+			if (!areZeroes()) {
+				inverse(numerator, denominator);
+				simplifyRational();
+			}else {
+				this.numerator=this.numerator;
+				this.denominator=this.denominator;
+			}
+		} catch (DivisionByZeroException e) {
+			e.getMessage();
+		}
 	}
 
-	public void inverse(T numerator, T denominator) {
+	public void inverse(T num, T den) {
 
 		T temp = null;
 
-		if (numerator instanceof Long || denominator instanceof Long) {
+		if (num instanceof Long || den instanceof Long) {
 			temp = (T) Long.valueOf(numerator.longValue());
 			numerator = (T) Long.valueOf(denominator.longValue());
 			denominator = temp;
-		} else if (numerator instanceof Short) {
-			if (denominator instanceof Integer) {
+		} else if (num instanceof Short) {
+			if (den instanceof Integer) {
 				temp = (T) Integer.valueOf(numerator.intValue());
 				numerator = (T) Integer.valueOf(denominator.intValue());
 				denominator = temp;
-			} else if (denominator instanceof Short) {
+			} else if (den instanceof Short) {
 				temp = (T) Short.valueOf((short) numerator.shortValue());
 				numerator = (T) Short.valueOf((short) denominator.intValue());
 				denominator = temp;
 			}
-		} else if (numerator instanceof Integer) {
+		} else if (num instanceof Integer) {
 			temp = (T) Integer.valueOf(numerator.intValue());
 			numerator = (T) Integer.valueOf(denominator.intValue());
 			denominator = temp;
 		}
+	}
+
+	public boolean areZeroes() throws DivisionByZeroException {
+
+		boolean zeroes = false;
+
+		if (numerator instanceof Long || denominator instanceof Long) {
+			if (numerator.longValue() == 0) {
+				zeroes = true;
+			} else if (denominator.longValue() == 0) {
+				new DivisionByZeroException("Dividing by zero isn't a possible operation");
+			}
+		} else if (numerator instanceof Short) {
+
+			if (denominator instanceof Integer) {
+				if (numerator.intValue() == 0) {
+					zeroes = true;
+				} else if (denominator.intValue() == 0) {
+					new DivisionByZeroException("Dividing by zero isn't a possible operation");
+				}
+			} else if (denominator instanceof Short) {
+				if (numerator.shortValue() == 0) {
+					zeroes = true;
+				} else if (denominator.shortValue() == 0) {
+					new DivisionByZeroException("Dividing by zero isn't a possible operation");
+				}
+			}
+		} else if (numerator instanceof Integer) {
+			if (numerator.intValue() == 0) {
+				zeroes = true;
+			} else if (denominator.intValue() == 0) {
+				new DivisionByZeroException("Dividing by zero isn't a possible operation");
+			}
+		}
+
+		return zeroes;
 	}
 
 	@Override
